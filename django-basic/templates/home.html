@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" >
 </head>
 <body>
-    <h3>This is our homepage</h3>
-    <h4>Loaded from a template</h4>
+    <!-- <h3>This is our homepage</h3>
+    <h4>Loaded from a template</h4> -->
     
     <div class="container pt-5">
         
@@ -27,33 +27,35 @@
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Position</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Phone</th>
                 </tr>
             </thead>
             <tbody>
+                {% for employee in employees %}
                 <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                    <!-- <th scope="row">{{ employee.id }}</th> -->
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <!-- <td>{{ employee }}</td> -->
+                    <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+                    <td>{{ employee.designation }}</td>
+                    <td>{{ employee.email_address }}</td>
+                    <td>{{ employee.phone_number }}</td>                    
                 </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                </tr>
+                {% endfor %}
+
             </tbody>
         </table>
 
-        <img src="{% static 'images/django.png' %}" alt="" width="300">
+        <!-- <img src="{% static 'images/django.png' %}" alt="" width="300"> -->
     </div>
+
+   
+        <!-- <h4>{{ employee }}</h4> -->
+        <h4></h4>
+        <h4>{{ employee.designation }}</h4>
+
 </body>
 </html>  
