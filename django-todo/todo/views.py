@@ -6,8 +6,8 @@ from .models import Task
 # Create your views here.
 def addTask(request):
     task = request.POST['task']
-    # The remainig fields of the task model are either automatically filled or have default values(is_completed=False)
     Task.objects.create(task=task)
+    # The remaining fields of the task model are either automatically filled or have default values(is_completed=False)
     # return HttpResponse('The form was submitted')
     return redirect("home")
     
