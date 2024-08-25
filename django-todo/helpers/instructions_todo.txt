@@ -1,0 +1,149 @@
+
+###############################################################
+### 3.Django Start (Daily)
+###############################################################
+
+cd django-todo/
+
+source env/Scripts/activate
+
+python manage.py runserver
+
+
+###########################################
+### 1. Virtual Environment
+###########################################
+python -m venv env
+
+source env/Scripts/activate
+
+# no packages should be returned from a new venv
+pip freeze
+
+deactivate
+
+############################
+pip install -r helpers/requirements_manual.txt
+
+python.exe -m pip install --upgrade pip
+
+pip freeze > helpers/requirements.txt
+
+
+###############################################################
+### 2. Django Start
+### https://docs.djangoproject.com/en/5.1/intro/tutorial01/
+###############################################################
+
+source env/Scripts/activate
+
+cd django-todo/
+
+django-admin startproject todo_main .
+
+python manage.py runserver
+
+python manage.py migrate
+
+#####################################
+Admin section
+#####################################
+
+cd django-basic/
+python manage.py runserver
+
+### create tables in the db automatically
+python manage.py migrate
+
+### create db admin
+python manage.py createsuperuser
+
+
+#####################################
+Home Page
+#####################################
+in urls.py add:
+...
+from . import views
+...
+urlpatterns = [
+    ...
+    path("", views.home, name="home"),
+]
+
+create a views.py file & add:
+for test first:
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Hello, World!")
+
+
+for production:
+create templates folder in the project root
+create html template
+add templates folder to the settings.py->TEMPLATES->DIRS list
+
+in views.py:
+from django.shortcuts import render
+
+def home(request):
+    return render(request, "home.html")
+
+
+#############################################################
+App creation
+#############################################################
+
+python manage.py startapp todo
+
+# add the new app in the settings file: INSTALLED_APPS
+
+#############################################################
+Model creation
+Create a model for the todo app
+#############################################################
+
+Modify the models file in the newly created app
+create classes inheriting from 
+django.db.models.Model (base class)
+
+
+# Register the new models in the admin.py in the respective app folder (todo/admin.py)
+# to be visible in the web admin panel
+1) import the classes from the models:      from . models import Task
+2) register the model:                      admin.site.register(Task)
+
+### For the model changes to take effect 2 commands are needed:
+python manage.py makemigrations     -> read the models file and prepare a file with sql commands
+python manage.py migrate            -> execute the sql commands
+
+python manage.py runserver
+
+
+#############################################################
+Adding logic to fetch the tasks
+#############################################################
+todo_main / views
+from todo.models import Task
+def home(request):
+    tasks = Task.objects.filter(is_completed=False)
+    return render(request, "home.html", context={"tasks123": tasks})
+
+
+#############################################################
+Add button functionality to add a new task to the database
+#############################################################
+
+
+
+
+#############################################################
+Changing task status from the home page buttons
+#############################################################
+create a TaskAdmin class in todo/admin
+register the TaskAdmin class in todo/admin
+
+create a new endpoint in todo_main/urls that redirects to todo/urls
+create a todo/urls
+

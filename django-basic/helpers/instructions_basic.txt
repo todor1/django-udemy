@@ -23,7 +23,7 @@ pip freeze
 deactivate
 
 ############################
-pip install -r requirements_manual.txt
+pip install -r helpers/requirements_manual.txt
 
 python.exe -m pip install --upgrade pip
 
