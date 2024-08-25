@@ -134,8 +134,19 @@ def home(request):
 #############################################################
 Add button functionality to add a new task to the database
 #############################################################
+1.create a new urlpatterns list within the app/urls (todo/urls)
+from django.urls import path
+from . import views
 
+urlpatterns = [
+    path("addTask/", views.addTask, name="addTask"),
+]
 
+2. create a view function in todo/views
+from django.shortcuts import render
+
+def addTask(request):
+    return render(request, "addTask.html")
 
 
 #############################################################

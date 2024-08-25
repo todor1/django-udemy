@@ -42,8 +42,11 @@
           <div class="card m-1">
             <div class="card-body">
               {{ task.task}}
+              <!-- Get primary key for each task {{ task.task}} PK: {{ task.pk }} -->
               <span style="position: relative; float: right">
-                <a class="btn btn-success"
+                <a
+                  href="{% url 'mark_as_done' task.pk %}"
+                  class="btn btn-success"
                   ><i class="fa fa-check"></i> Mark as Done</a
                 >
                 <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
@@ -56,9 +59,11 @@
         <div class="col-md-5 col-lg-5">
           <h5>Completed Tasks</h5>
           <!-- List of all the tasks that have completed -->
+          {% for compl_task in completed_tasks %}
           <div class="card m-1">
-            <div class="card-body">This is the completed task.</div>
+            <div class="card-body">{{ compl_task.task }}</div>
           </div>
+          {% endfor %}
         </div>
       </div>
       <div class="row">
@@ -67,15 +72,21 @@
           style="position: absolute; bottom: 50px"
         >
           <!-- To Do Form -->
-          <form action="">
+          <form action="{% url 'addTask' %}" method="POST">
+            {% csrf_token %}
             <div class="form-group">
               <span style="display: flex">
                 <input
                   type="text"
+                  name="task"
                   class="form-control"
                   placeholder="Add a task"
                 />
-                <button class="btn btn-primary" style="width: 200px">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  style="width: 200px"
+                >
                   <i class="fa fa-plus"></i> Add
                 </button>
               </span>
