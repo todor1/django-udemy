@@ -66,7 +66,7 @@ python manage.py createsuperuser
 App creation
 #############################################################
 
-python manage.py startapp todo_list
+python manage.py startapp todo_list  # app_name
 
 # add the new lookup app in the settings file: INSTALLED_APPS
 
@@ -82,7 +82,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include('lookup.urls')),
+    path("", include('todo_list.urls')), # app_name.urls
 ]
 
 in app-urls: lookup/urls:
