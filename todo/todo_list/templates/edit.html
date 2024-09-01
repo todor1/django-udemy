@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}
+    Edit task
+{% endblock title %}
+{% block content %}
+    {% if task_edited %}
+        <form class="d-flex" method="post">
+            {% csrf_token %}
+            <input class="form-control me-2"
+                   type="search"
+                   placeholder="{{ task_edited.item }}"
+                   value="{{ task_edited.item }}"
+                   aria-label="Search"
+                   name="item">
+            <input type="hidden" name="completed" value="{{ task_edited.completed }}">
+            <button class="btn btn-outline-secondary mysubmitbtn"  type="submit">Edit Task</button>
+        </form>
+    {% else %}
+    {% endif %}
+{% endblock content %}
