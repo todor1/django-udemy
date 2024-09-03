@@ -1,0 +1,98 @@
+https://mailtrap.io/blog/python-send-email/
+https://mailtrap.io/blog/python-send-email-gmail/
+
+
+####################################################################################################################
+
+# https://python.plainenglish.io/how-to-use-python-to-send-emails-using-namecheap-private-email-a557f6d0c67d
+
+import smtplib
+from email.message import EmailMessage
+sender_email = 'hello@yourdomain.com'
+receiver_email  = "receiver@something.com"
+smtp_server = 'mail.privateemail.com'
+port = 465
+login = "hello@yourdomain.com"
+password = "YOUR PRIVATE EMAIL PASSWORD"
+message = EmailMessage()
+message["Subject"] = "Your Subject"
+message["From"] = f"Your Display Name <{sender_email}>"
+message["To"] = receiver_email
+content = "Hello world"
+message.set_content(content)
+server = smtplib.SMTP_SSL(smtp_server, port)
+server.login(login, password)
+server.send_message(message)
+server.quit()
+Important things to note:
+
+sender_email is your own custom email from your domain
+login is the SAME as sender_email. NOT your namecheap account
+####################################################################################################################
+
+
+####################################################################################################################
+https://discuss.python.org/t/sending-email-using-own-smtp-server/57039/3
+import smtplib
+from email.mime.text import MIMEText
+
+smtp_server = '172.17.1.5'
+smtp_user = 'robertkwild@domain.com'
+smtp_connection = smtplib.SMTP(smtp_server)
+email_body = 'This is a test email sent using Python.'
+email_message = MIMEText(email_body)
+email_message['Subject'] = 'Test Email'
+email_message['From'] = 'robertkwild@domain.com'
+email_message['To'] = 'robert.wild@domain.com'
+smtp_connection.sendmail(smtp_user, 'robert.wild@domain.com', email_message.as_string())
+smtp_connection.quit()
+####################################################################################################################
+
+https://stackoverflow.com/questions/10147455/how-to-send-an-email-with-gmail-as-provider-using-python
+import smtplib
+
+fromaddr = 'user_me@gmail.com'
+toaddrs  = 'user_you@gmail.com'
+msg = 'Why,Oh why!'
+username = 'user_me@gmail.com'
+password = 'pwd'
+server = smtplib.SMTP('smtp.gmail.com:587')
+server.starttls()
+server.login(username,password)
+server.sendmail(fromaddr, toaddrs, msg)
+server.quit()
+
+
+def send_email(user, pwd, recipient, subject, body):
+    import smtplib
+
+    FROM = user
+    TO = recipient if isinstance(recipient, list) else [recipient]
+    SUBJECT = subject
+    TEXT = body
+
+    # Prepare actual message
+    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.ehlo()
+        server.starttls()
+        server.login(user, pwd)
+        server.sendmail(FROM, TO, message)
+        server.close()
+        print 'successfully sent the mail'
+    except:
+        print "failed to send mail"
+if you want to use Port 465 you have to create an SMTP_SSL object:
+
+# SMTP_SSL Example
+server_ssl = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+server_ssl.ehlo() # optional, called by login()
+server_ssl.login(gmail_user, gmail_pwd)  
+# ssl server doesn't support or need tls, so don't call server_ssl.starttls() 
+server_ssl.sendmail(FROM, TO, message)
+#server_ssl.quit()
+server_ssl.close()
+print 'successfully sent the mail'
+####################################################################################################################
