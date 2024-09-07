@@ -214,3 +214,8 @@ Variable value: <yourkey>
 
 Sign out and then log in to your PC.
 
+####################################################################
+SSH keys lecture
+https://www.udemy.com/course/top-python-and-django-web-development-bundle/learn/lecture/17576718#overview
+
+####################################################################
