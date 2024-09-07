@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if ticker %}{{ ticker }}{% endif %}
+    {% if api %}
+        {% if api == "Error..." %}
+            <p>There was a problem with loading the data</p>
+            <p>Please try again...</p>
+        {% else %}
+            <h4>{{ api.ticker }}</h4>
+            {% comment %} more granular data  {% endcomment %}
+            {% comment %} <table>
+                <th>Dtm</th>
+                <th>Open</th>
+                <th>High</th>
+                <th>Low</th>
+                <th>Close</th>
+                <th>Volume</th>
+                <th>VWAvgPrice</th>
+                {% for row in api.results %}
+                    <tr>
+                        <td>{{ row.t }}</td>
+                        <td>{{ row.o }}</td>
+                        <td>{{ row.h }}</td>
+                        <td>{{ row.l }}</td>
+                        <td>{{ row.c }}</td>
+                        <td>{{ row.v }}</td>
+                        <td>{{ row.vw }}</td>
+                    </tr>
+                {% endfor %}
+            </table> {% endcomment %}
+        {% endif %}
+    {% else %}
+        <p>No data</p>
+    {% endif %}
+{% endblock content %}

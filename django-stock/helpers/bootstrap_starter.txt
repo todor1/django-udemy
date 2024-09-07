@@ -75,3 +75,16 @@ https://getbootstrap.com/docs/5.0/components/navbar/
     </div>
   </div>
 </nav>
+
+#########################
+# Tables
+#########################
+https://getbootstrap.com/docs/5.0/content/tables/
+<table class="table">
+  <thead class="table-dark">
+    ...
+  </thead>
+  <tbody>
+    ...
+  </tbody>
+</table>

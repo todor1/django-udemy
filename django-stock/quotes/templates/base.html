@@ -31,18 +31,34 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'about' %}">About</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add_stock' %}">Add Stock</a>
+                        </li>
                     </ul>
-                    <form class="d-flex">
+                    <form action="{% url 'home' %}" class="d-flex" method="post">
+                        {% csrf_token %}
                         <input class="form-control me-2"
                                type="search"
-                               placeholder="Search"
+                               placeholder="Get stock quote"
+                               name="ticker"
                                aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-success" type="submit">Stock Quote</button>
                     </form>
                 </div>
             </div>
         </nav>
         <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
             {% block content %}
                 <h3>Hello from Base</h3>
             {% endblock content %}
