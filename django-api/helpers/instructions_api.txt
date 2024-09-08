@@ -1,0 +1,220 @@
+
+###############################################################
+### 3.Django Start (Daily)
+###############################################################
+
+cd django-api/
+
+source env/Scripts/activate
+
+python manage.py runserver
+
+
+###########################################
+### 1. Virtual Environment
+###########################################
+python -m venv env
+
+source env/Scripts/activate
+
+# no packages should be returned from a new venv
+pip freeze
+
+(deactivate)
+
+############################
+pip install -r helpers/requirements_manual.txt
+
+python.exe -m pip install --upgrade pip
+
+pip freeze > helpers/requirements.txt
+
+
+###############################################################
+### 2. Django Start
+### https://docs.djangoproject.com/en/5.1/intro/tutorial01/
+###############################################################
+
+source env/Scripts/activate
+
+cd django-api/
+
+# without the . at the end 2 folders weather are created
+django-admin startproject djangoapi .
+
+python manage.py migrate
+
+python manage.py runserver
+
+#####################################
+Admin section
+#####################################
+
+cd django-api/
+
+### create tables in the db automatically
+python manage.py migrate
+
+### create db admin
+python manage.py createsuperuser
+
+python manage.py runserver
+
+#############################################################
+App creation
+#############################################################
+
+python manage.py startapp ...  # app_name
+
+python manage.py startapp rest_framework
+python manage.py startapp courses
+
+# add the new lookup app in the settings file: INSTALLED_APPS
+
+
+#####################################
+Home Page
+#####################################
+Different approach than Rathan: all urls handled in the respective app, 
+base urls file only redirects to the app of interest
+
+in urls.py add:
+from django.urls import path, include
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include('quotes.urls')), # app_name.urls
+]
+
+in app-urls: quotes/urls:
+from . import views
+
+urlpatterns = [
+    path("", views.home, name="home"),
+]
+
+create a templates folder under the APP directory (lookup/templates)
+in that directory create html templates: home.html
+
+create a views.py file & add:
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html', {})
+
+
+#############################################################
+Base HTML files with extensions
+Bootstrap elements to html templates
+Navbar editing
+#############################################################
+
+Good intro to SSH keys for Github:
+https://www.udemy.com/course/top-python-and-django-web-development-bundle/learn/lecture/17575106#overview
+##########################################################################################################
+
+
+
+
+
+
+##########################################################################################################################
+#############################################################
+Model creation
+Create a model for the todo app
+#############################################################
+
+Modify the models file in the newly created app
+create classes inheriting from 
+django.db.models.Model (base class)
+
+
+# Register the new models in the admin.py in the respective app folder (todo/admin.py)
+# to be visible in the web admin panel
+1) import the classes from the models:      from . models import Task
+2) register the model:                      admin.site.register(Task)
+
+### For the model changes to take effect 2 commands are needed:
+python manage.py makemigrations     -> read the models file and prepare a file with sql commands
+python manage.py migrate            -> execute the sql commands
+
+python manage.py runserver
+
+
+#############################################################
+Adding logic to fetch the tasks
+#############################################################
+todo_main / views
+from todo.models import Task
+def home(request):
+    tasks = Task.objects.filter(is_completed=False)
+    return render(request, "home.html", context={"tasks123": tasks})
+
+
+#############################################################
+Add button functionality to add a new task to the database
+#############################################################
+1.create a new urlpatterns list within the app/urls (todo/urls)
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("addTask/", views.addTask, name="addTask"),
+]
+
+2. create a view function in todo/views
+from django.shortcuts import render
+
+def addTask(request):
+    return render(request, "addTask.html")
+
+
+#############################################################
+Changing task status from the home page buttons
+#############################################################
+create a TaskAdmin class in todo/admin
+register the TaskAdmin class in todo/admin
+
+create a new endpoint in todo_main/urls that redirects to todo/urls
+create a todo/urls
+
+####################################################################
+Environment Variables API Keys
+
+https://www.youtube.com/watch?v=8pMPbLidLxw
+
+dotenv package:
+https://www.youtube.com/watch?v=FrQ46MPSpUs
+
+environment variables:
+https://stackoverflow.com/questions/74672366/how-to-work-with-environment-variables-on-windows-linux
+
+import os
+api_key = os.getenv("API_KEY")
+
+https://www.youtube.com/watch?v=DVVYHlGYIHY
+
+dotenv
+https://www.youtube.com/watch?v=CJjSOzb0IYs
+
+env-files Django:
+https://medium.com/@morganhezekiah111/how-to-use-env-files-in-django-e7348c05343c
+https://djangocentral.com/environment-variables-in-django/
+https://configu.com/blog/using-py-dotenv-python-dotenv-package-to-manage-env-variables/
+https://django-environ.readthedocs.io/en/latest/faq.html
+https://dev.to/defidelity/protect-your-sensitive-data-a-guide-to-env-files-in-django-499e
+
+####################################################################
+Advanced system settings
+Environment Variables...
+Select New… from the User variables section(top). Add your name/key-value pair, replacing with your API key.
+Variable name: OPENAI_API_KEY
+Variable value: <yourkey>
+
+Sign out and then log in to your PC.
+
+####################################################################
+SSH keys lecture
+https://www.udemy.com/course/top-python-and-django-web-development-bundle/learn/lecture/17576718#overview
+
+####################################################################
