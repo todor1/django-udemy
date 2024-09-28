@@ -72,9 +72,12 @@ create following subfolders to dataentry app:
  management
     commands
 
+python manage.py startapp uploads
 
+python manage.py makemigrations     -> read the models file and prepare a file with sql commands
+python manage.py migrate            -> execute the sql commands
 
-
+python manage.py runserver
 
 
 
