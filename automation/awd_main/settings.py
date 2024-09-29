@@ -137,6 +137,6 @@ MEDIA_ROOT = BASE_DIR / "media/"
 MESSAGE_TAGS = {
     messages.INFO: "",
     50: "critical",
-    # messages.ERROR: "danger",
-    # messages.SUCCESS: "success",
+    messages.ERROR: "danger",
+    messages.SUCCESS: "success",
 }

@@ -15,6 +15,6 @@ def get_all_custom_models():
     custom_models = []
     for model in apps.get_models():
         if model.__name__ not in default_models:
-            print(model._meta.app_label, "->", model.__name__)
+            # print(model._meta.app_label, "->", model.__name__)
             custom_models.append(model.__name__)
     return custom_models
