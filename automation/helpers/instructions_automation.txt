@@ -1,3 +1,4 @@
+https://blog.jetbrains.com/pycharm/2024/09/how-to-use-fastapi-for-machine-learning/
 
 ###############################################################
 ### 3.Django Start (Daily)
@@ -187,3 +188,30 @@ register the TaskAdmin class in todo/admin
 create a new endpoint in todo_main/urls that redirects to todo/urls
 create a todo/urls
 
+
+#############################################################
+Redis Server
+https://redis.io/blog/get-redis-cli-without-installing-redis-server/
+#############################################################
+redis-server --port 6389
+
+redis-cli (not working on vscode bash)
+ping
+
+*start on port different than 6379 (default after msi installation):
+https://stackoverflow.com/questions/31769097/cant-bind-tcp-listener-6379-using-redis-on-windows
+You must've used the .msi installer. It automagically registers a windows service which starts instantly after the installation (at least on my win 10 machine).
+This service uses the default config and binds to port 6379. When you start redis-server from the command line, if you haven't specified a different port through a config file, it picks up the default config again and tries to bind to port 6379 which fails.
+Your cli works because it connects to the redis service that's already listening on 6379. Your shutdown command stops the service and from there things work as expected. Mystery solved. Case closed.
+
+
+#############################################################
+Celery
+#############################################################
+https://www.udemy.com/course/automate-the-boring-stuff-with-python-django/learn/lecture/41747916#overview
+windows:
+cd automation/
+
+source env/Scripts/activate
+
+celery -A awd_main worker --loglevel=info --pool=solo

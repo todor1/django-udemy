@@ -131,12 +131,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media/"
 
-# # Custom settings for messages
-# from django.contrib.messages import constants as messages
-
+### Custom settings for messages
 MESSAGE_TAGS = {
     messages.INFO: "",
     50: "critical",
     messages.ERROR: "danger",
     messages.SUCCESS: "success",
 }
+
+CELERY_BROKER_URL = "redis://localhost:6379"  # default server
+# CELERY_BROKER_URL = "redis://localhost:6389"  # manually started under different port (redis-server --port 6389)

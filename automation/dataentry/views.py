@@ -5,6 +5,7 @@ from django.conf import settings
 import pathlib
 from django.core.management import call_command
 from django.contrib import messages
+from .tasks import import_data_task
 
 
 # Create your views here.
@@ -18,20 +19,28 @@ def import_data(request):
         # constuct the full path to the file
         base_url = pathlib.Path(settings.BASE_DIR)
         relative_path = pathlib.Path(upload.file.url.lstrip("/"))
-        full_path = base_url / relative_path
-        # print(f"{full_path=}")
+        full_path = str(base_url / relative_path)
+        print(f"{full_path=}")
         # resolved_path = full_path.resolve()
         # print(f"{resolved_path=}")
 
-        # trigger the import_data command
-        try:
-            call_command("importdata", full_path, model_name)
-            messages.success(request, "Data imported successfully")
-        except Exception as e:
-            # print(f"Error: {e}")
-            # raise e
-            messages.error(request, f"Error: {e}")
-            # messages.error(request, str(e))
+        # # trigger the import_data command
+        # try:
+        #     call_command("importdata", full_path, model_name)
+        #     messages.success(request, "Data imported successfully")
+        # except Exception as e:
+        #     # print(f"Error: {e}")
+        #     # raise e
+        #     messages.error(request, f"Error: {e}")
+        #     # messages.error(request, str(e))
+
+        # execute the import_data_task asynchronously
+        import_data_task.delay(full_path, model_name)
+        # show the message to the user
+        messages.success(
+            request,
+            "Your data is being imported. You will be notified once it is done.",
+        )
 
         return redirect("import_data")
     else:
