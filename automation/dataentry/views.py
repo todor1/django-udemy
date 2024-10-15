@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .utils import get_all_custom_models
+from .utils import get_all_custom_models, check_csv_errors
 from uploads.models import Upload
 from django.conf import settings
 import pathlib
@@ -20,29 +20,25 @@ def import_data(request):
         base_url = pathlib.Path(settings.BASE_DIR)
         relative_path = pathlib.Path(upload.file.url.lstrip("/"))
         full_path = str(base_url / relative_path)
-        print(f"{full_path=}")
-        # resolved_path = full_path.resolve()
-        # print(f"{resolved_path=}")
+        # print(f"{full_path=}")
 
-        # # trigger the import_data command
-        # try:
-        #     call_command("importdata", full_path, model_name)
-        #     messages.success(request, "Data imported successfully")
-        # except Exception as e:
-        #     # print(f"Error: {e}")
-        #     # raise e
-        #     messages.error(request, f"Error: {e}")
-        #     # messages.error(request, str(e))
+        # check for csv errors
+        try:
+            _ = check_csv_errors(full_path, model_name)
+        except Exception as e:
+            messages.error(request, str(e))
+            return redirect("import_data")
 
         # execute the import_data_task asynchronously
         import_data_task.delay(full_path, model_name)
+
         # show the message to the user
         messages.success(
             request,
             "Your data is being imported. You will be notified once it is done.",
         )
-
         return redirect("import_data")
+
     else:
         custom_models = get_all_custom_models()
         context = {"all_models": custom_models}

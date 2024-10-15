@@ -1,0 +1,88 @@
+
+###############################################################
+### Django Start (Daily)
+https://blog.jetbrains.com/pycharm/2024/09/how-to-use-fastapi-for-machine-learning/
+###############################################################
+
+cd masterclass
+
+source env/Scripts/activate
+
+cd mysite
+
+python manage.py runserver
+
+
+###########################################
+### 1. Virtual Environment
+###########################################
+python -m venv env
+
+source env/Scripts/activate
+
+# no packages should be returned from a new venv
+pip freeze
+
+(deactivate)
+
+############################
+pip install -r helpers/requirements_manual.txt
+
+python.exe -m pip install --upgrade pip
+
+pip freeze > helpers/requirements.txt
+
+
+###############################################################
+### 2. Django Start
+### https://docs.djangoproject.com/en/5.1/intro/tutorial01/
+###############################################################
+
+source env/Scripts/activate
+
+cd masterclass/
+cd masterclass/mysite
+
+# without the "." at the below command end 2 folders weather are created
+django-admin startproject mysite
+
+python manage.py migrate
+
+python manage.py runserver
+
+#####################################
+Admin section
+#####################################
+
+cd masterclass/
+python manage.py runserver
+
+### create tables in the db automatically
+python manage.py migrate
+
+### create db admin
+python manage.py createsuperuser
+
+
+#############################################################
+App creation
+#############################################################
+
+-> Create an app
+python manage.py startapp food
+
+-> add the new lookup app in the settings file: INSTALLED_APPS
+"food.apps.FoodConfig", or just the name of the app (food)
+
+-> read the models file and prepare a file with sql commands
+python manage.py makemigrations     
+python manage.py makemigrations food (for the specfic app)
+
+-> get the sql commands during execution
+python manage.py sqlmigrate food 0001  
+          
+-> execute the sql commands
+python manage.py migrate  
+
+python manage.py runserver
+

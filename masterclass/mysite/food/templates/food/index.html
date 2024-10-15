@@ -1,0 +1,8 @@
+{% for item in item_list %}
+    <ul>
+        <li>
+            {% comment %} <a href="{% url 'food:detail' item.id %}">{{ item.name }}</a> {% endcomment %}
+            {{ item.pk }} {{ item.name }}
+        </li>
+    </ul>
+{% endfor %}

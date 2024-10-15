@@ -19,4 +19,5 @@ def import_data_task(full_path, model_name):
         call_command("importdata", full_path, model_name)
     except Exception as e:
         raise e
+    # send an email to the user
     return "Data imported successfully"

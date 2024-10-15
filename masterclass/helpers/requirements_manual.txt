@@ -1,0 +1,7 @@
+Django
+requests
+djlint
+black
+redis
+celery
+django-celery-results
