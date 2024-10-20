@@ -14,3 +14,10 @@ def index(request):
 
 def item(request):
     return HttpResponse("<h3>This is the item view</h3>")
+
+
+def detail(request, item_id):
+    # return HttpResponse("<h2>Details for item id: " + str(item_id) + "</h2>")
+    item = Item.objects.get(pk=item_id)
+    context = {"item": item}
+    return render(request, "food/detail.html", context)
