@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,9 +6,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="food,masterclass" />
         <meta name="keywords" content="food,masterclass" />
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
         <title>Document</title>
     </head>
     <body>
-        <h1>This is just a template</h1>
+        <nav class="navbar navbar-dark bg-dark">
+            {% comment %} <a href="{% url 'index' %}" class="navbar-brand">FoodApp</a> NOT FOUND neither in mysite/urls nor in app/urls {% endcomment %}
+            <a href="#" class="navbar-brand">FoodApp</a>
+            <div class="navbar">
+                <a href="#" class="nav-item nav-link">Add Item</a>
+                <a href="#" class="nav-item nav-link">View Item</a>
+                <a href="#" class="nav-item nav-link">Delete Item</a>
+            </div>
+        </nav>
+        {% block content %}
+        {% endblock content %}
     </body>
 </html>

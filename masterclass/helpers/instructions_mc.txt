@@ -6,7 +6,7 @@ https://blog.jetbrains.com/pycharm/2024/09/how-to-use-fastapi-for-machine-learni
 
 cd masterclass
 
-cd masterclass
+source env/Scripts/activate
 
 cd mysite
 

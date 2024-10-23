@@ -1,7 +1,35 @@
-{% for item in item_list %}
-    <ul>
-        <li>
-            <a href="{% url 'food:detail' item.id %}">{{ item.pk }} {{ item.name }}</a>
-        </li>
-    </ul>
-{% endfor %}
+{% extends "food/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="food,app" />
+        <meta name="description" content="food,app" />
+        <title>Document</title>
+        {% comment %} <link rel="stylesheet" href="{% static 'food/style.css' %}"> {% endcomment %}
+    </head>
+    <body>
+        {% block content %}
+            {% for item in item_list %}
+                <div class="row">
+                    <div class="col-md-3 offset-md-2">
+                        <img src="{{ item.image }}"
+                             alt="food_placeholder"
+                             class="card"
+                             height="150px"
+                             width="150px" />
+                    </div>
+                    <div class="col-md-4">
+                        <h3>{{ item.name }}</h3>
+                        <h5>{{ item.description }}</h5>
+                        <h5>{{ item.price }}</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{% url 'food:detail' item.id %}" class="btn btn-success">Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endblock content %}
+    </body>
+</html>
