@@ -17,7 +17,7 @@
             {% comment %} <a href="{% url 'index' %}" class="navbar-brand">FoodApp</a> NOT FOUND neither in mysite/urls nor in app/urls {% endcomment %}
             <a href="#" class="navbar-brand">FoodApp</a>
             <div class="navbar">
-                <a href="#" class="nav-item nav-link">Add Item</a>
+                <a href="{% url 'food:create_item' %}" class="nav-item nav-link">Add Item</a>
                 <a href="#" class="nav-item nav-link">View Item</a>
                 <a href="#" class="nav-item nav-link">Delete Item</a>
             </div>

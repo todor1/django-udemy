@@ -86,3 +86,10 @@ python manage.py migrate
 
 python manage.py runserver
 
+############################################################
+Forms for adding items
+#############################################################
+-> Add url with view function
+-> Setup a forms.ModelForm in a newly created forms.py file
+-> Create a form submit html snippet in a separate html file (item-form)
+-> Create specfic view function for handling/manipulating the ModelForm object
