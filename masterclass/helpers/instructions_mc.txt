@@ -54,7 +54,8 @@ python manage.py runserver
 Admin section
 #####################################
 
-cd masterclass/
+cd masterclass/mysite
+
 python manage.py runserver
 
 ### create tables in the db automatically
@@ -68,8 +69,12 @@ python manage.py createsuperuser
 App creation
 #############################################################
 
+cd masterclass/mysite
+
 -> Create an app
 python manage.py startapp food
+
+python manage.py startapp users
 
 -> add the new lookup app in the settings file: INSTALLED_APPS
 "food.apps.FoodConfig", or just the name of the app (food)
