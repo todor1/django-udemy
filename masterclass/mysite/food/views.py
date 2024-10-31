@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from .models import Item
 from django.template import loader
 from .forms import ItemForm
+from django.views.generic.list import ListView
 
 
 def index(request):
@@ -11,6 +12,16 @@ def index(request):
     # template = loader.get_template("food/index.html")
     # return HttpResponse(template.render(context, request))
     return render(request, "food/index.html", context)
+
+
+class IndexClassView(ListView):
+    # class based view for the index page, replaces the index function
+    model = Item
+    template_name = "food/index.html"
+    context_object_name = "item_list"
+
+    # def get_queryset(self):
+    #     return Item.objects.all()
 
 
 def item(request):
