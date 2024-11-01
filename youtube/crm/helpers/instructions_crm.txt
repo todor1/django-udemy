@@ -1,5 +1,6 @@
 https://youtu.be/t10QcFx7d5k?si=IXe-LwsUAw2Bq5Zd&t=410
 
+
 ###############################################################
 ### 3.Django Start (Daily)
 ###############################################################
@@ -70,4 +71,31 @@ python manage.py startapp ...  # app_name
 python manage.py startapp website
 
 # add the new lookup app in the settings file: INSTALLED_APPS
+
+#############################################################
+MySQL server start
+#############################################################
+If you installed MySQL using the MSI installer, it should be set up as a service.
+
+METHOD #1: Access the Installed Service
+Open up the Services icon in the Control Panel
+Scroll alphabetically to the MySQL service
+Right click the service
+Click Start Service
+
+METHOD #2: Command Line Execution
+Open DOS Window
+From the C: Prompt, run this: net start mysql or 'net start mysql57'. The right name may vary on your system
+If you get this error
+
+C:\Windows\system32>net start mysql
+System error 5 has occurred.
+
+Access is denied.
+
+then you didn't run the DOS Window as Administrator. Try again as administrator. You should see:
+C:\Windows\system32>net start mysql
+The MySQL service is starting..
+The MySQL service was started successfully.
+#############################################################
 
