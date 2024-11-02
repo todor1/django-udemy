@@ -6,7 +6,7 @@
         {% else %}
             <h3>Login</h3>
             <br />
-            <form action="{% url "home" %}" method="post">
+            <form method="post" action="{% url "home" %}">
                 {% csrf_token %}
                 <div class="mb-3">
                     <input type="text"
