@@ -79,6 +79,20 @@ def customer_record(request, pk):
         return redirect("home")
 
 
+# def delete_record(request, pk):
+#     # Original code without confirmation
+#     if request.user.is_authenticated:
+#         # Look up records by primary key
+#         record_to_delete = Record.objects.get(id=pk)
+#         if record_to_delete:
+#             record_to_delete.delete()
+#             messages.success(request, "Record deleted.")
+#             return redirect("home")
+#     else:
+#         messages.error(request, "You need to be logged in to delete a record.")
+#         return redirect("home")
+
+
 def delete_record(request, pk):
     # Confirmation berfore deleting a record
     # https://openclassrooms.com/en/courses/6967196-create-a-web-application-with-django/7349788-delete-objects-safely-with-user-confirmation
@@ -86,9 +100,15 @@ def delete_record(request, pk):
         # Look up records by primary key
         record_to_delete = Record.objects.get(id=pk)
         if record_to_delete:
-            record_to_delete.delete()
-            messages.success(request, "Record deleted.")
-            return redirect("home")
+            if request.method == "POST":
+                record_to_delete.delete()
+                messages.success(request, "Record deleted.")
+                return redirect("home")
+            return render(
+                request,
+                "delete_record.html",
+                context={"record_to_delete": record_to_delete},
+            )
     else:
         messages.error(request, "You need to be logged in to delete a record.")
         return redirect("home")
