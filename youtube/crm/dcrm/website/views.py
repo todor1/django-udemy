@@ -80,6 +80,8 @@ def customer_record(request, pk):
 
 
 def delete_record(request, pk):
+    # Confirmation berfore deleting a record
+    # https://openclassrooms.com/en/courses/6967196-create-a-web-application-with-django/7349788-delete-objects-safely-with-user-confirmation
     if request.user.is_authenticated:
         # Look up records by primary key
         record_to_delete = Record.objects.get(id=pk)
