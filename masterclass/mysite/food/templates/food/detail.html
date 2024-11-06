@@ -10,10 +10,14 @@
                      width="300px">
             </div>
             <div class="col-md-6">
-                <h1>{{ item.name }}</h1>
+                <h1>{{ object.name }}</h1>
+                <h2>{{ object.description }}</h2>
+                <h3>{{ object.price }}</h3>
+                {% comment %} <h1>{{ item.name }}</h1>
                 <h2>{{ item.description }}</h2>
-                <h3>{{ item.price }}</h3>
-                <a href="{% url 'food:delete_item' item.id %}">Delete</a>
+                <h3>{{ item.price }}</h3> {% endcomment %}
+                <a href="{% url 'food:delete_item' item.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'food:index' %}" class="btn btn-secondary">Back</a>
             </div>
         </div>
     </div>

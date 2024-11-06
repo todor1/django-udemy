@@ -4,6 +4,8 @@ from .models import Item
 from django.template import loader
 from .forms import ItemForm
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 
 
 def index(request):
@@ -35,12 +37,33 @@ def detail(request, item_id):
     return render(request, "food/detail.html", context)
 
 
+class FoodDetail(DetailView):
+    model = Item
+    template_name = "food/detail.html"
+
+
 def create_item(request):
     form = ItemForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect("food:index")
     return render(request, "food/item-form.html", context={"form": form})
+
+
+# Class based view for creating items
+class CreateItem(CreateView):
+    model = Item
+    fields = [
+        "name",
+        "description",
+        "price",
+        "image",
+    ]  # fields to be displayed in the form
+    template_name = "food/item-form.html"
+
+    def form_valid(self, form):
+        form.instance.user_name = self.request.user
+        return super().form_valid(form)
 
 
 def update_item(request, id):

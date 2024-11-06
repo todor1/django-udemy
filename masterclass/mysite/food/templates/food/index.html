@@ -10,6 +10,7 @@
         {% comment %} <link rel="stylesheet" href="{% static 'food/style.css' %}"> {% endcomment %}
     </head>
     <body>
+        {% comment %} <div class="container"> {% endcomment %}
         {% block content %}
             {% for item in item_list %}
                 <div class="row">
@@ -24,6 +25,7 @@
                         <h3>{{ item.name }}</h3>
                         <h5>{{ item.description }}</h5>
                         <h5>{{ item.price }}</h5>
+                        <h6>Added by: {{ item.user_name }}</h6>
                     </div>
                     <div class="col-md-2">
                         <a href="{% url 'food:detail' item.id %}" class="btn btn-success">Details</a>
@@ -31,5 +33,6 @@
                 </div>
             {% endfor %}
         {% endblock content %}
+        {% comment %} </div> {% endcomment %}
     </body>
 </html>
