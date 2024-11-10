@@ -1,4 +1,3 @@
-
 ###############################################################
 ### Django Start (Daily)
 https://blog.jetbrains.com/pycharm/2024/09/how-to-use-fastapi-for-machine-learning/
@@ -98,3 +97,98 @@ Forms for adding items
 -> Setup a forms.ModelForm in a newly created forms.py file
 -> Create a form submit html snippet in a separate html file (item-form)
 -> Create specfic view function for handling/manipulating the ModelForm object
+
+
+#####################################################################################################
+### Second Project: REST API Movies
+#####################################################################################################
+cd masterclass
+source env/Scripts/activate
+
+cd drf
+
+python manage.py runserver
+
+### New Project
+cd drf
+django-admin startproject mysite .
+
+### New App
+django-admin startapp movies
+python manage.py startapp movies
+
+python manage.py migrate
+
+python manage.py runserver
+
+
+##################################
+Add to installed apps:
+    "rest_framework",
+    "movies.apps.MoviesConfig",
+##################################
+
+### create db admin
+python manage.py createsuperuser
+
+python manage.py runserver
+
+
+### 1) create a model
+
+### 2) create a serializer 
+(django rest: serialization of models - convert db datasets to native python data types, rendered as json/xml...)
+serializers.py
+
+### 3) create a view 
+
+### 4) define urls (user routers and view sets)
+
+### 5) adding api endpoints
+
+
+########################
+Images
+########################
+
+1) create a field in the model
+2) specify the image field properties in the serializer (image = serializers.ImageField(max_length=None, use_url=True))
+3) edit mysite/urls.py to add a media path where Django will look for images:
+    MEDIA_ROOT = BASE_DIR / "media"
+    MEDIA_URL = "/media/"
+4) add the static path to the urls:
+    from django.conf.urls.static import static
+    from django.conf import settings
+    ...
+    urlpatterns = [...] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+###############################################################
+Django dashboards
+https://wildfish-django-dashboards.readthedocs.io/en/latest/dashboards/howto/quickstart.html
+###############################################################
+
+#####################################################################################################
+### Third Project: Pagination & Search
+#####################################################################################################
+cd masterclass
+source env/Scripts/activate
+
+cd pagination
+python manage.py runserver
+
+### New Project
+cd pagination
+django-admin startproject mysite .
+
+### New App
+django-admin startapp newapp
+or
+python manage.py startapp newapp
+
+python manage.py migrate
+
+python manage.py runserver
+
+### create db admin
+python manage.py createsuperuser

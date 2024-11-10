@@ -6,3 +6,4 @@ redis
 celery
 django-celery-results
 pillow
+djangorestframework

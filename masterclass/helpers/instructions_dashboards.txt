@@ -1,0 +1,181 @@
+###############################################################
+Django dashboards
+https://wildfish-django-dashboards.readthedocs.io/en/latest/dashboards/howto/quickstart.html
+###############################################################
+Create a new Django project:
+
+# Create the project directory
+mkdir demo
+cd demo
+
+# Install
+pip install django-dashboards
+
+# Set up a new project
+django-admin startproject demo .
+cd demo
+django-admin startapp mydashboard
+cd ..
+
+# Sync the database
+python manage.py migrate
+
+
+
+###############################################################
+### Django Start (Daily)
+https://blog.jetbrains.com/pycharm/2024/09/how-to-use-fastapi-for-machine-learning/
+###############################################################
+
+cd masterclass
+
+source env/Scripts/activate
+
+cd mysite
+
+python manage.py runserver
+
+
+###########################################
+### 1. Virtual Environment
+###########################################
+python -m venv env
+
+source env/Scripts/activate
+
+# no packages should be returned from a new venv
+pip freeze
+
+(deactivate)
+
+############################
+pip install -r helpers/requirements_manual.txt
+
+python.exe -m pip install --upgrade pip
+
+pip freeze > helpers/requirements.txt
+
+
+###############################################################
+### 2. Django Start
+### https://docs.djangoproject.com/en/5.1/intro/tutorial01/
+###############################################################
+
+source env/Scripts/activate
+
+cd masterclass/
+cd masterclass/mysite
+
+# without the "." at the below command end 2 folders weather are created
+django-admin startproject mysite
+
+python manage.py migrate
+
+python manage.py runserver
+
+#####################################
+Admin section
+#####################################
+
+cd masterclass/mysite
+
+python manage.py runserver
+
+### create tables in the db automatically
+python manage.py migrate
+
+### create db admin
+python manage.py createsuperuser
+
+
+#############################################################
+App creation
+#############################################################
+
+cd masterclass/mysite
+
+-> Create an app
+python manage.py startapp food
+
+python manage.py startapp users
+
+-> add the new lookup app in the settings file: INSTALLED_APPS
+"food.apps.FoodConfig", or just the name of the app (food)
+
+-> read the models file and prepare a file with sql commands
+python manage.py makemigrations     
+python manage.py makemigrations food (for the specfic app)
+
+-> get the sql commands during execution
+python manage.py sqlmigrate food 0001  
+          
+-> execute the sql commands
+python manage.py migrate  
+
+python manage.py runserver
+
+############################################################
+Forms for adding items
+#############################################################
+-> Add url with view function
+-> Setup a forms.ModelForm in a newly created forms.py file
+-> Create a form submit html snippet in a separate html file (item-form)
+-> Create specfic view function for handling/manipulating the ModelForm object
+
+
+#####################################################################################################
+### Second Project REST API
+#####################################################################################################
+cd masterclass
+source env/Scripts/activate
+
+cd drf
+
+python manage.py runserver
+
+### New Project
+cd drf
+django-admin startproject mysite .
+
+### New App
+django-admin startapp movies
+python manage.py startapp movies
+
+python manage.py migrate
+
+python manage.py runserver
+
+
+##################################
+Add to installed apps:
+    "rest_framework",
+    "movies.apps.MoviesConfig",
+##################################
+
+### create db admin
+python manage.py createsuperuser
+
+python manage.py runserver
+
+
+### 1) create a model
+
+### 2) create a serializer 
+(django rest: serialization of models - convert db datasets to native python data types, rendered as json/xml...)
+serializers.py
+
+### 3) create a view 
+
+### 4) define urls (user routers and view sets)
+
+### 5) adding api endpoints
+
+
+########################
+Images
+########################
+
+1) create a field in the model
+2) specify the image field properties in the serializer (image = serializers.ImageField(max_length=None, use_url=True))
+3) edit mysite/urls.py to add a media path where Django will look for images
+
