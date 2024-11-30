@@ -192,3 +192,21 @@ python manage.py runserver
 
 ### create db admin
 python manage.py createsuperuser
+
+
+##################################
+Project 2: Ecommerce site
+##################################
+cd masterclass
+
+source env/Scripts/activate
+
+django-admin startproject ecomsite
+
+cd ecomsite
+
+django-admin startapp shop
+
+python manage.py migrate
+
+python manage.py runserver

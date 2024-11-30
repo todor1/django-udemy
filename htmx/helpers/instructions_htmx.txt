@@ -1,0 +1,88 @@
+
+###############################################################
+### 3.Django Start (Daily)
+###############################################################
+
+cd django-basic/
+
+source env/Scripts/activate
+
+python manage.py runserver
+
+
+###########################################
+### 1. Virtual Environment
+###########################################
+python -m venv env
+
+source env/Scripts/activate
+
+# no packages should be returned from a new venv
+pip freeze
+
+deactivate
+
+############################
+pip install -r helpers/requirements_manual.txt
+
+python.exe -m pip install --upgrade pip
+
+pip freeze > requirements.txt
+
+
+###############################################################
+### 2. Django Start
+### https://docs.djangoproject.com/en/5.1/intro/tutorial01/
+###############################################################
+
+source env/Scripts/activate
+
+cd django-basic/
+
+django-admin startproject mysite .
+
+python manage.py runserver
+
+python manage.py startapp employees
+
+# add the new app in the settings file: INSTALLED_APPS
+
+#####################################
+Admin section
+#####################################
+
+cd django-basic/
+python manage.py runserver
+
+### create tables in the db automatically
+python manage.py migrate
+
+### create db admin
+python manage.py createsuperuser
+
+
+#####################################
+Model creation
+#####################################
+Modify the models file; create classes inheriting from 
+django.db.models.Model (base class)
+
+Pillow package needed to handle the photos upload:
+
+source env/Scripts/activate
+python -m pip install Pillow
+
+
+### For the model changes to take effect 2 commands are needed:
+python manage.py makemigrations     -> read the models file and prepare a file with sql commands
+python manage.py migrate            -> execute the sql commands
+
+# Register the new models in the admin.py in the respective package/folder 
+# to be visible in the web admin panel
+1) import the classes from the models:      from .models import Employee
+2) register the model:                      admin.site.register(Employee)
+
+
+python manage.py runserver
+
+
