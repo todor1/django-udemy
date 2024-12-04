@@ -1,0 +1,69 @@
+
+###############################################################
+### 3.Django Start (Daily)
+###############################################################
+
+cd django-vue/
+
+source env/Scripts/activate
+
+python manage.py runserver
+
+
+###########################################
+### 1. Virtual Environment
+###########################################
+python -m venv env
+
+source env/Scripts/activate
+
+# no packages should be returned from a new venv
+pip freeze
+
+deactivate
+
+############################
+pip install -r helpers/requirements_manual.txt
+
+python.exe -m pip install --upgrade pip
+
+pip freeze > requirements.txt
+
+
+###############################################################
+### 2. Django Start
+### https://docs.djangoproject.com/en/5.1/intro/tutorial01/
+###############################################################
+
+source env/Scripts/activate
+
+cd django-vue/
+
+django-admin startproject api .
+
+cd api && python manage.py runserver
+
+python manage.py runserver
+
+
+# add the new app in the settings file: INSTALLED_APPS
+
+#####################################
+Admin section
+#####################################
+
+cd api/
+python manage.py runserver
+
+### create tables in the db automatically
+python manage.py migrate
+
+### create db admin
+python manage.py createsuperuser
+
+#####################################
+Create an App
+#####################################
+cd api/
+
+python manage.py startapp reporting
