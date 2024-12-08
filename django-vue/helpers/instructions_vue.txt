@@ -7,6 +7,8 @@ cd django-vue/
 
 source env/Scripts/activate
 
+cd api  
+
 python manage.py runserver
 
 
@@ -67,3 +69,43 @@ Create an App
 cd api/
 
 python manage.py startapp reporting
+
+#####################################
+Migrations
+#####################################
+cd api/
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+
+
+###################################################
+DB Manual Manipulation - Data Insertion via Shell
+###################################################
+
+python manage.py shell
+
+from reporting.models import Order
+from django.utils import timezone
+
+data = Order(amount=100, description="This is a test order", created_time=timezone.now())
+data.save()
+
+exit()
+
+########
+# restart & check db records
+########
+python manage.py shell
+from reporting.models import Order
+Order.objects.all()
+
+
+###################################################
+DB Manual Manipulation - Seeding Data into DB
+###################################################
+1) create a folder named [fixtures] under the project directory
+2) paste the testseed.json file there
+3) python manage.py loaddata testseed.json
