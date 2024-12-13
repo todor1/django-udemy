@@ -110,3 +110,18 @@ DB Manual Manipulation - Seeding Data into DB
 1) create a folder named [fixtures] under the project directory
 2) paste the testseed.json file there
 3) python manage.py loaddata testseed.json
+
+
+##############################
+Frontend, Vue
+##############################
+cd django-vue/client
+
+cd client
+
+npx -p @vue/cli vue create client
+
+npm install axios
+
+npm run serve
+

@@ -1,9 +1,8 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <nav><router-link to="/">Home</router-link> |</nav>
+  <!-- below line added by ai, whithout it no result was displayed -->
+  <!-- <router-view></router-view> -->
+  <router-view />
 </template>
 
 <style lang="scss">
