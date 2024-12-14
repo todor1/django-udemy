@@ -1,4 +1,4 @@
-git commit -m 'djvue ch3 frontend'
+git commit -m 'djvue ch4 orders backend end'
 
 ###############################################################
 ### 3.Django Start (Daily)
@@ -124,4 +124,38 @@ npx -p @vue/cli vue create client
 npm install axios
 
 npm run serve
+
+
+##########################################
+After the above proof of concept
+Remove 
+    files in reporting/migraions
+    db.sqlite
+
+Start with a clean model structure
+#########################################
+
+After deleting the whole migrations folder and the poc db, no changed have been detected when running 
+python manage.py makemigrations
+
+AI solution:
+
+Here's what happened and why you were getting "No changes detected":
+
+Your migrations directory was empty, but Django still said "No changes detected" because it couldn't properly detect the state of your models.
+By explicitly specifying the app name (python manage.py makemigrations reporting), we forced Django to create the initial migrations for your models.
+The migrations have been created successfully and include all your models:
+Category
+Customer
+Supplier
+Product
+Order
+We then applied the migrations using python manage.py migrate, which created all the necessary database tables.
+Now your database schema is in sync with your models, and everything should work as expected. If you make any changes to your models in the future, running python manage.py makemigrations will detect those changes and create new migration files accordingly.
+#########################################
+
+Copy downloaded seeddata.json to fixtures
+python manage.py loaddata seeddata.json
+(N.b. keys in json file should correspond to model field names)
+
 
