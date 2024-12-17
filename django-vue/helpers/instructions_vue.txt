@@ -1,4 +1,9 @@
-git commit -m 'djvue ch4 orders backend end'
+git commit -m 'djvue ch5 frontend styling end'
+
+
+https://github.com/Learn-While-Do/DashboardApp-client
+
+https://github.com/Learn-While-Do/DashboardApp-api
 
 ###############################################################
 ### 3.Django Start (Daily)
@@ -11,6 +16,10 @@ source env/Scripts/activate
 cd api  
 
 python manage.py runserver
+
+cd client
+
+npm run serve
 
 
 ###########################################

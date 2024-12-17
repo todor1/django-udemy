@@ -1,11 +1,43 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import DashboardView from "@/views/DashboardView.vue";
+import OrdersView from "@/views/reporting/screens/OrdersView.vue";
+import ProductsView from "@/views/reporting/screens/ProductsView.vue";
+import SuppliersView from "@/views/reporting/screens/SuppliersView.vue";
+import CustomersView from "@/views/relations/screens/CustomersView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    name: "dashboard",
+    component: DashboardView,
+    // redirect: "/orders",
+
+    children: [
+      {
+        path: "/orders",
+        name: "orders",
+        component: OrdersView,
+        meta: { screen: "orders" },
+      },
+      {
+        path: "/products",
+        name: "products",
+        component: ProductsView,
+        meta: { screen: "products" },
+      },
+      {
+        path: "/suppliers",
+        name: "suppliers",
+        component: SuppliersView,
+        meta: { screen: "suppliers" },
+      },
+      {
+        path: "/customers",
+        name: "customers",
+        component: CustomersView,
+        meta: { screen: "customers" },
+      },
+    ],
   },
 ];
 
